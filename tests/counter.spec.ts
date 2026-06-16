@@ -20,3 +20,10 @@ test("clicking Increase 3 times shows Count: 3", async ({ page }) => {
   await increaseBtn.click();
   await expect(page.getByTestId("count-display")).toHaveText("Count: 3");
 });
+
+test("clicking Decrease makes count go down", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Increase" }).click();
+  await page.getByRole("button", { name: "Decrease" }).click();
+  await expect(page.getByTestId("count-display")).toHaveText("Count: 0");
+});
