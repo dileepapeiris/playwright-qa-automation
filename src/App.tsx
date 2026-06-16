@@ -39,7 +39,10 @@ export default function App() {
         <button onClick={addTodo} style={{ marginLeft: "8px" }}>Add</button>
         <ul>
           {todos.map((todo, i) => (
-            <li key={i} data-testid="todo-item">{todo}</li>
+            <li key={i} data-testid="todo-item">
+              {todo}
+              <button onClick={() => deleteTodo(i)} style={{ marginLeft: "8px" }}>Delete</button>
+            </li>
           ))}
         </ul>
         <p data-testid="todo-count">Total todos: {todos.length}</p>
