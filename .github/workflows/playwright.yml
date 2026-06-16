@@ -1,0 +1,66 @@
+name: Playwright Tests
+
+# When does this run?
+# - Every time someone pushes to main or dev branch
+# - Every time someone opens or updates a Pull Request
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  test:
+    name: E2E Tests (${{ matrix.browser }})
+    runs-on: ubuntu-latest
+
+    # Run tests on 3 browsers in parallel (each is a separate job)
+    strategy:
+      fail-fast: false          # Don't cancel other browsers if one fails
+      matrix:
+        browser: [chromium, firefox, webkit]
+
+    steps:
+      # 1. Download the code from GitHub
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"           # Cache node_modules → faster builds
+
+      # 3. Install npm packages
+      - name: Install dependencies
+        run: npm ci              # ci = clean install (faster & exact versions)
+
+      # 4. Install only the browser we need for this job
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+
+      # 5. Run the tests!
+      - name: Run Playwright tests
+        run: npx playwright test --project=${{ matrix.browser }}
+        env:
+          CI: true               # Tells Playwright we are running in CI
+
+      # 6. Upload the HTML test report so you can download & view it
+      #    This runs even if tests fail (always: true)
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ matrix.browser }}
+          path: playwright-report/
+          retention-days: 30
+
+      # 7. Upload screenshots/videos from failed tests
+      - name: Upload failed test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.browser }}
+          path: test-results/
+          retention-days: 7
