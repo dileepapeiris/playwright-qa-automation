@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function App() {
   const [count, setCount] = useState(0);
+  const [todos, setTodos] = useState(["Buy milk", "Go for a walk"]);
 
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
