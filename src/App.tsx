@@ -5,6 +5,12 @@ export default function App() {
   const [todos, setTodos] = useState(["Buy milk", "Go for a walk"]);
   const [input, setInput] = useState("");
 
+  function addTodo() {
+    if (input.trim() === "") return;
+    setTodos([...todos, input.trim()]);
+    setInput("");
+  }
+
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
       <h1 data-testid="app-title">PlayWright Testing</h1>
