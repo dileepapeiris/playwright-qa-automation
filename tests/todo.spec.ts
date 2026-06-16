@@ -26,3 +26,9 @@ test("input clears after adding a todo", async ({ page }) => {
   await page.getByRole("button", { name: "Add" }).click();
   await expect(input).toHaveValue("");
 });
+
+test("empty input does NOT add a todo", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Add" }).click();
+  await expect(page.getByTestId("todo-item")).toHaveCount(2);
+});
