@@ -27,3 +27,11 @@ test("clicking Decrease makes count go down", async ({ page }) => {
   await page.getByRole("button", { name: "Decrease" }).click();
   await expect(page.getByTestId("count-display")).toHaveText("Count: 0");
 });
+
+test("clicking Reset brings count back to 0", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Increase" }).click();
+  await page.getByRole("button", { name: "Increase" }).click();
+  await page.getByRole("button", { name: "Reset" }).click();
+  await expect(page.getByTestId("count-display")).toHaveText("Count: 0");
+});
