@@ -11,6 +11,10 @@ export default function App() {
     setInput("");
   }
 
+  function deleteTodo(index: number) {
+    setTodos(todos.filter((_, i) => i !== index));
+  }
+
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
       <h1 data-testid="app-title">PlayWright Testing</h1>
