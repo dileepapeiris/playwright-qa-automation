@@ -18,3 +18,11 @@ test("can add a new todo", async ({ page }) => {
   await expect(page.getByText("Learn Playwright")).toBeVisible();
   await expect(page.getByTestId("todo-count")).toHaveText("Total todos: 3");
 });
+
+test("input clears after adding a todo", async ({ page }) => {
+  await page.goto("/");
+  const input = page.getByPlaceholder("Type a todo...");
+  await input.fill("Some task");
+  await page.getByRole("button", { name: "Add" }).click();
+  await expect(input).toHaveValue("");
+});
