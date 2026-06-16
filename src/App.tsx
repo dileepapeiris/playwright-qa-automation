@@ -11,6 +11,8 @@ export default function App() {
         <h2>Counter</h2>
         <p data-testid="count-display">Count: {count}</p>
         <button onClick={() => setCount(count + 1)}>Increase</button>
+        <button onClick={() => setCount(count - 1)} style={{ marginLeft: "8px" }}>Decrease</button>
+        <button onClick={() => setCount(0)} style={{ marginLeft: "8px" }}>Reset</button>
       </section>
     </div>
   );
