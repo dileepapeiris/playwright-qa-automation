@@ -21,6 +21,11 @@ export default function App() {
 
       <section>
         <h2>Todo List</h2>
+        <input
+          placeholder="Type a todo..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
         <ul>
           {todos.map((todo, i) => (
             <li key={i} data-testid="todo-item">{todo}</li>
