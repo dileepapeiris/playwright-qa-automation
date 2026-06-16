@@ -14,6 +14,12 @@ export default function App() {
         <button onClick={() => setCount(count - 1)} style={{ marginLeft: "8px" }}>Decrease</button>
         <button onClick={() => setCount(0)} style={{ marginLeft: "8px" }}>Reset</button>
       </section>
+
+      <hr />
+
+      <section>
+        <h2>Todo List</h2>
+      </section>
     </div>
   );
 }
