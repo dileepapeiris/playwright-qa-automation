@@ -20,6 +20,12 @@ export default function App() {
 
       <section>
         <h2>Todo List</h2>
+        <ul>
+          {todos.map((todo, i) => (
+            <li key={i} data-testid="todo-item">{todo}</li>
+          ))}
+        </ul>
+        <p data-testid="todo-count">Total todos: {todos.length}</p>
       </section>
     </div>
   );
