@@ -10,6 +10,7 @@ export default function App() {
       <section>
         <h2>Counter</h2>
         <p data-testid="count-display">Count: {count}</p>
+        <button onClick={() => setCount(count + 1)}>Increase</button>
       </section>
     </div>
   );
