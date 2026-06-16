@@ -32,6 +32,7 @@ export default function App() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
+        <button onClick={addTodo} style={{ marginLeft: "8px" }}>Add</button>
         <ul>
           {todos.map((todo, i) => (
             <li key={i} data-testid="todo-item">{todo}</li>
