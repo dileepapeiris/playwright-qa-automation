@@ -32,3 +32,11 @@ test("empty input does NOT add a todo", async ({ page }) => {
   await page.getByRole("button", { name: "Add" }).click();
   await expect(page.getByTestId("todo-item")).toHaveCount(2);
 });
+
+test("can delete a todo", async ({ page }) => {
+  await page.goto("/");
+  const buyMilkItem = page.getByTestId("todo-item").filter({ hasText: "Buy milk" });
+  await buyMilkItem.getByRole("button", { name: "Delete" }).click();
+  await expect(page.getByText("Buy milk")).not.toBeVisible();
+  await expect(page.getByTestId("todo-count")).toHaveText("Total todos: 1");
+});
